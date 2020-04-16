@@ -32,3 +32,4 @@ var fin =new Date();
 
 var duracion = fin.getTime()-inicio.getTime();
 console.log(duracion, " milisegundos");
+
