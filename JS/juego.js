@@ -53,6 +53,20 @@ function Jugador(nombre){
     }
 };
 
+function getRandom() {
+    return Math.round(Math.random());
+  }
+
+function presionoClick(){
+    legolas.tirarFlecha(gandalf);
+    console.log(getRandom());
+
+}
+function presionoClick2(){
+    gandalf.tirarFlecha(legolas);
+    console.log(getRandom());
+    
+}
 
 //jugadores
 var gandalf = new Jugador("Gandalf");
