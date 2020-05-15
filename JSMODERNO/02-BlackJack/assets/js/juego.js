@@ -1,7 +1,9 @@
 
 
-let deck= [];
-const tipos = ["C", "D", "H", "S"]
+let deck        = [];
+const tipos     = ["C", "D", "H", "S"]
+const especiales = ["A", "J", "Q", "K"]
+
 
 const crearDeck= () =>{
 
@@ -10,9 +12,20 @@ const crearDeck= () =>{
             deck.push(i + tipo);
         }
     }
-    console.log(deck);
+    for(let tipo of tipos){
+        for (let esp of especiales){
+            deck.push(esp + tipo);
+        }
+    }
+    //console.log(deck);
     deck = _.shuffle(deck);
     console.log(deck);
+    return deck;
 }
 
 crearDeck();
+
+//Esta funcion me permite tomar una carta
+
+
+
