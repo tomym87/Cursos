@@ -1,15 +1,20 @@
 
 
-let deck        = [];
-const tipos     = ["C", "D", "H", "S"];
-const especiales = ["A", "J", "Q", "K"];
-const btnPedir  = document.querySelector("#btnPedir");
-let puntosJugador = 0;
-let puntosComputadora = 0;
+let deck                = [];
+const tipos             = ["C", "D", "H", "S"];
+const especiales        = ["A", "J", "Q", "K"];
+const btnPedir          = document.querySelector("#btnPedir");
+let puntosJugador       = 0;
+let puntosComputadora   = 0;
 
 // REferencias HTML
 //const smalls = document.querySelectorAll();
-const puntosHTML = document.querySelectorAll('small');
+const puntosHTML        = document.querySelectorAll('small');
+const divCartasJugador  = document.querySelector('#jugador-cartas');
+const divCartasComputadora  = document.querySelector('#computadora-cartas');
+
+
+
 
 //esta funcion crea una nueva baraja
 const crearDeck= () =>{
@@ -64,6 +69,22 @@ const valorCarta = (carta) =>{
             : valor * 1 ;
 
 }
+//Turno de la pc
+const turnoComputadora = (puntosMinimos)=>{
+
+   const carta = pedirCarta();
+
+   puntosComputadora = puntosComputadora + valorCarta(carta);
+   puntosHTML[1].innerText = puntosComputadora;
+
+   const imgCarta = document.createElement('img');
+   imgCarta.src = `assets/cartas/${carta}.png`;
+   imgCarta.classList.add('carta');
+   divCartasComputadora.append(imgCarta);
+}
+
+
+
 //const valor = valorCarta(pedirCarta());
 //console.log({valor});
 
@@ -73,5 +94,22 @@ btnPedir.addEventListener('click', ()=>{
     puntosJugador = puntosJugador + valorCarta(carta);
     puntosHTML[0].innerText=puntosJugador;
 
+    const imgCarta= document.createElement('img');
+    imgCarta.src =`assets/cartas/${carta}.png`;
+    imgCarta.classList.add('carta');
+    divCartasJugador.append(imgCarta);
+
+    if(puntosJugador > 21){
+        console.warn('Lo siento Mucho Perdiste');
+        btnPedir.disabled = true;
+    }else if(puntosJugador === 21){
+        console.warn('21, Genial ');
+        btnPedir.disable= true;
+
+    }
+
 })
 
+//pruebas turno pc
+
+turnoComputadora(12);
