@@ -4,6 +4,9 @@ let deck                = [];
 const tipos             = ["C", "D", "H", "S"];
 const especiales        = ["A", "J", "Q", "K"];
 const btnPedir          = document.querySelector("#btnPedir");
+const btnDetener        = document.querySelector("#btnDetener");
+
+
 let puntosJugador       = 0;
 let puntosComputadora   = 0;
 
@@ -72,7 +75,8 @@ const valorCarta = (carta) =>{
 //Turno de la pc
 const turnoComputadora = (puntosMinimos)=>{
 
-   const carta = pedirCarta();
+   do{
+    const carta = pedirCarta();
 
    puntosComputadora = puntosComputadora + valorCarta(carta);
    puntosHTML[1].innerText = puntosComputadora;
@@ -81,6 +85,12 @@ const turnoComputadora = (puntosMinimos)=>{
    imgCarta.src = `assets/cartas/${carta}.png`;
    imgCarta.classList.add('carta');
    divCartasComputadora.append(imgCarta);
+
+   if(puntosMinimos > 21){
+       break;
+   }
+
+   }while((puntosComputadora < puntosMinimos) && (puntosMinimos<=21));
 }
 
 
@@ -90,6 +100,8 @@ const turnoComputadora = (puntosMinimos)=>{
 
 //Eventos
 btnPedir.addEventListener('click', ()=>{
+    
+    
     const carta = pedirCarta();
     puntosJugador = puntosJugador + valorCarta(carta);
     puntosHTML[0].innerText=puntosJugador;
@@ -102,14 +114,25 @@ btnPedir.addEventListener('click', ()=>{
     if(puntosJugador > 21){
         console.warn('Lo siento Mucho Perdiste');
         btnPedir.disabled = true;
+        btnDetener.disabled = true;
+        turnoComputadora(puntosJugador);
     }else if(puntosJugador === 21){
         console.warn('21, Genial ');
         btnPedir.disable= true;
+        btnDetener.disabled = true;
+        turnoComputadora(puntosJugador);
 
     }
+
+});
+
+btnDetener.addEventListener('click', ()=>{
+
+    btnPedir.disabled   = true;
+    btnDetener.disabled = true;
+
+    turnoComputadora(puntosJugador);
 
 })
 
 //pruebas turno pc
-
-turnoComputadora(12);
