@@ -5,7 +5,7 @@ const tipos             = ["C", "D", "H", "S"];
 const especiales        = ["A", "J", "Q", "K"];
 const btnPedir          = document.querySelector("#btnPedir");
 const btnDetener        = document.querySelector("#btnDetener");
-
+const btnNuevo          = document.querySelector("#btnNuevo");
 
 let puntosJugador       = 0;
 let puntosComputadora   = 0;
@@ -91,6 +91,21 @@ const turnoComputadora = (puntosMinimos)=>{
    }
 
    }while((puntosComputadora < puntosMinimos) && (puntosMinimos<=21));
+   setTimeout(()=>{
+   if(puntosComputadora  === puntosMinimos){
+       alert("Nadie Gana");
+   }
+   else if(puntosJugador >21){
+       alert("Computadora Gana");
+   }
+   else if ( puntosComputadora > 21){
+       alert("Jugador Gana");
+   }
+   else{
+       alert("Computadora Gana");
+   }
+}, 50);
+
 }
 
 
@@ -134,5 +149,28 @@ btnDetener.addEventListener('click', ()=>{
     turnoComputadora(puntosJugador);
 
 })
+
+
+//Nuevo juego
+btnNuevo.addEventListener("click", () =>{
+    console.clear();
+    deck =[];
+    deck = crearDeck();
+
+    puntosJugador       = 0;
+    puntosComputadora   = 0;
+
+    puntosHTML[0].innerText = 0;
+    puntosHTML[1].innerText = 0;
+
+    divCartasComputadora.innerHTML  = "";
+    divCartasJugador.innerHTML      = "";
+    
+    btnPedir.disabled   = false;
+    btnDetener.disabled = false;
+
+
+});
+
 
 //pruebas turno pc
